@@ -40,10 +40,10 @@ function XModal() {
             <h1>User Details Modal</h1>
             <button onClick={openModal}>Open Form</button>
             {isOpen && (
-                <div className={styles.modalcontent}>
+                <div className={styles['modal-content']}>
                     <h1>Fill Details</h1>
-                    <form onSubmit={handleSubmit} className="modal-content">
-                        <div className="modal-content">
+                    <form onSubmit={handleSubmit}>
+                        <div>
                             <div className={styles.divSec}>
                                 <label htmlFor="username">Username:</label>
                                 <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
@@ -60,7 +60,7 @@ function XModal() {
                                 <label htmlFor="dob">Date of Birth:</label>
                                 <input type="date" id="dob" value={dob} onChange={(e) => setDob(e.target.value)}/>
                             </div>
-                            <button type="submit" className="submit-button">Submit</button>
+                            <button type="submit" className={styles['submit-button']}>Submit</button>
                         </div>
                     </form>
                     {errorMsg && <p>{errorMsg}</p>}
