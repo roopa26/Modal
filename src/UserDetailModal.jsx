@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "./UserDetailModal.module.css"
+import "./UserDetailModal.css"
 
 function XModal() {
     const [isOpen, setIsOpen] = useState(false);
@@ -36,31 +36,31 @@ function XModal() {
     };
 
     return (
-        <div className={isOpen ? `${styles.modalBck} ${styles.modal}` : styles.modal}>
+        <div className={isOpen ? 'modalBck modal' : 'modal'}>
             <h1>User Details Modal</h1>
             <button onClick={openModal}>Open Form</button>
             {isOpen && (
-                <div className={styles['modal-content']}>
+                <div className='modal-content'>
                     <h1>Fill Details</h1>
                     <form onSubmit={handleSubmit}>
                         <div>
-                            <div className={styles.divSec}>
+                            <div className='divSec'>
                                 <label htmlFor="username">Username:</label>
                                 <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
                             </div>
-                            <div className={styles.divSec}>
+                            <div className='divSec'>
                                 <label htmlFor="email">Email:</label>
                                 <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                             </div>
-                            <div className={styles.divSec}>
+                            <div className='divSec'>
                                 <label htmlFor="phone">Phone Number:</label>
                                 <input type="text" id="phone" value={phone} onChange={(e) => setPhone(e.target.value)}/>
                             </div>
-                            <div className={styles.divSec}>
+                            <div className='divSec'>
                                 <label htmlFor="dob">Date of Birth:</label>
                                 <input type="date" id="dob" value={dob} onChange={(e) => setDob(e.target.value)}/>
                             </div>
-                            <button type="submit" className={styles['submit-button']}>Submit</button>
+                            <button type="submit" className='submit-button'>Submit</button>
                         </div>
                     </form>
                     {errorMsg && <p>{errorMsg}</p>}
