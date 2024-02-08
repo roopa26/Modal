@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import "./UserDetailModal.css"
+import React, { useState, useEffect, useRef } from 'react';
+import "./UserDetailModal.css";
 
 function XModal() {
     const [isOpen, setIsOpen] = useState(false);
@@ -8,6 +8,21 @@ function XModal() {
     const [dob, setDob] = useState('');
     const [phone, setPhone] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                closeModal();
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const openModal = () => {
         setIsOpen(true);
@@ -27,7 +42,7 @@ function XModal() {
 
         if (!/^\d{10}$/.test(phone)) {
             alert('Invalid phone number. Please enter a 10-digit phone number.');
-        } else if (dob == "" || new Date(dob) > new Date()) {
+        } else if (dob === "" || new Date(dob) > new Date()) {
             alert('Invalid date of birth. Date of birth cannot be in the future.');
         } else {
             setErrorMsg('');
@@ -40,7 +55,7 @@ function XModal() {
             <h1>User Details Modal</h1>
             <button onClick={openModal}>Open Form</button>
             {isOpen && (
-                <div className='modal-content'>
+                <div className='modal-content' ref={modalRef}>
                     <h1>Fill Details</h1>
                     <form onSubmit={handleSubmit}>
                         <div>
@@ -60,7 +75,7 @@ function XModal() {
                                 <label htmlFor="dob">Date of Birth:</label>
                                 <input type="date" id="dob" value={dob} onChange={(e) => setDob(e.target.value)}/>
                             </div>
-                            <button type="submit" className='submit-button'>Submit</button>
+                            <button type="submit" className="submit-button">Submit</button>
                         </div>
                     </form>
                     {errorMsg && <p>{errorMsg}</p>}
