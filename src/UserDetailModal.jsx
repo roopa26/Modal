@@ -12,17 +12,22 @@ function XModal() {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
-                closeModal();
+            if (isOpen && modalRef.current && !modalRef.current.contains(event.target)) {
+                const isInsideForm = modalRef.current.querySelector('form').contains(event.target);
+                const isOpenFormButtonClicked = event.target.tagName === 'BUTTON' && event.target.textContent === 'Open Form';
+                if (!isInsideForm && !isOpenFormButtonClicked) {
+                    closeModal();
+                }
             }
         };
-
-        document.addEventListener('mousedown', handleClickOutside);
-
+    
+        document.body.addEventListener('click', handleClickOutside);
+    
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.body.removeEventListener('click', handleClickOutside);
         };
-    }, []);
+    }, [isOpen]);    
+    
 
     const openModal = () => {
         setIsOpen(true);
