@@ -56,11 +56,12 @@ function XModal() {
     };
 
     return (
-        <div className={isOpen ? 'modalBck modal' : 'modal'}>
+        <div className={isOpen ? 'modalBck maindiv' : 'maindiv'}>
             <h1>User Details Modal</h1>
             <button onClick={openModal}>Open Form</button>
             {isOpen && (
-                <div className='modal-content' ref={modalRef}>
+                <div className='modal'>
+                    <div className='modal-content' ref={modalRef}>
                     <h1>Fill Details</h1>
                     <form onSubmit={handleSubmit}>
                         <div>
@@ -84,6 +85,7 @@ function XModal() {
                         </div>
                     </form>
                     {errorMsg && <p>{errorMsg}</p>}
+                </div>
                 </div>
             )}
         </div>
